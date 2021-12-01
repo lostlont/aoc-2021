@@ -1,0 +1,9 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: Test
+	image: rust:1.56.1
+	commands:
+	- sh test.sh
