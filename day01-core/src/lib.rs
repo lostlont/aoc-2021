@@ -1,3 +1,8 @@
+use std::fs::File;
+use std::io::prelude::*;
+use std::io::BufReader;
+use std::path::Path;
+
 pub fn gradients(input: &Vec<i32>) -> Vec<i32>
 {
 	let current = input
@@ -20,4 +25,27 @@ pub fn sum(values: &Vec<i32>) -> i32
 		.filter(|x| *x > 0)
 		.count()
 		as i32
+}
+
+pub fn solution(path: &Path) -> i32
+{
+	let file = File::open(&path)
+		.expect(
+			&format!(
+				"Couldn't open file {}",
+				path.display()));
+	let reader = BufReader::new(file);
+	let input = reader
+		.lines()
+		.map(
+			|line| line.expect("Couldn't read line!"))
+		.map(
+			|line| line
+				.parse::<i32>()
+				.expect(
+					&format!("Couldn't parse value: {}!", line)))
+		.collect::<Vec<_>>();
+
+	let values = gradients(&input);
+	sum(&values)
 }
