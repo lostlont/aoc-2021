@@ -7,7 +7,7 @@ mod tests
 	use day01_core::sum;
 
 	#[test]
-	fn gradient_returns_empty_for_one()
+	fn gradients_returns_empty_for_one()
 	{
 		let input = vec![10];
 
@@ -18,7 +18,7 @@ mod tests
 	}
 
 	#[test]
-	fn gradient_returns_single_for_two()
+	fn gradients_returns_single_for_two()
 	{
 		let input = vec![10, 12];
 
@@ -29,7 +29,7 @@ mod tests
 	}
 
 	#[test]
-	fn gradient_returns_two_for_three()
+	fn gradients_returns_two_for_three()
 	{
 		let input = vec![10, 15, 5];
 
@@ -40,7 +40,7 @@ mod tests
 	}
 
 	#[test]
-	fn gradient_example()
+	fn gradients_example()
 	{
 		let input = vec![
 			199,
