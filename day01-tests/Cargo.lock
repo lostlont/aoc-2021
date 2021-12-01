@@ -3,12 +3,12 @@
 version = 3
 
 [[package]]
-name = "day01"
+name = "day01-core"
 version = "0.1.0"
 
 [[package]]
 name = "day01-tests"
 version = "0.1.0"
 dependencies = [
- "day01",
+ "day01-core",
 ]
