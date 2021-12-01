@@ -27,7 +27,13 @@ pub fn sum(values: &Vec<i32>) -> i32
 		as i32
 }
 
-pub fn solution(path: &Path) -> i32
+pub fn solution(input: &Vec<i32>) -> i32
+{
+	let values = gradients(&input);
+	sum(&values)
+}
+
+pub fn solution_from(path: &Path) -> i32
 {
 	let file = File::open(&path)
 		.expect(
@@ -46,6 +52,5 @@ pub fn solution(path: &Path) -> i32
 					&format!("Couldn't parse value: {}!", line)))
 		.collect::<Vec<_>>();
 
-	let values = gradients(&input);
-	sum(&values)
+	solution(&input)
 }

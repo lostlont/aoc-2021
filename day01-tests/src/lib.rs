@@ -4,6 +4,7 @@ mod tests
 	use std::path::Path;
 	use day01_core::gradients;
 	use day01_core::solution;
+	use day01_core::solution_from;
 	use day01_core::sum;
 
 	#[test]
@@ -107,17 +108,16 @@ mod tests
 			263,
 		];
 
-		let gradients = gradients(&input);
-		let sum = sum(&gradients);
+		let actual = solution(&input);
 
-		assert_eq!(sum, 7);
+		assert_eq!(actual, 7);
 	}
 
 	#[test]
 	fn solution_is_correct()
 	{
 		let path = Path::new("../day01/input");
-		let solution = solution(&path);
+		let solution = solution_from(&path);
 
 		assert_eq!(solution, 1602);
 	}
