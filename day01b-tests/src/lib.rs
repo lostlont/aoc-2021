@@ -1,8 +1,9 @@
 #[cfg(test)]
 mod tests
 {
-	//use day01_core::sum;
+	use std::path::Path;
 	use day01b_core::solution;
+	use day01b_core::solution_from;
 	use day01b_core::window;
 
 	#[test]
@@ -46,5 +47,14 @@ mod tests
 		let solution = solution(&input);
 
 		assert_eq!(solution, 5);
+	}
+
+	#[test]
+	fn solution_is_correct()
+	{
+		let path = Path::new("../day01/input");
+		let solution = solution_from(&path);
+
+		assert_eq!(solution, 1633);
 	}
 }
