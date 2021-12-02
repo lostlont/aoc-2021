@@ -6,6 +6,6 @@ steps:
   - name: Test
     image: rust:1.56.1
     commands:
-      - cd $CRATE
-      - cargo build --verbose --all
+      - cd aoc-2021-tests
+	  - cargo build --verbose --all
       - cargo test --verbose --all
