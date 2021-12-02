@@ -7,5 +7,5 @@ steps:
     image: rust:1.56.1
     commands:
       - cd aoc-2021-tests
-	  - cargo build --verbose --all
+      - cargo build --verbose --all
       - cargo test --verbose --all
