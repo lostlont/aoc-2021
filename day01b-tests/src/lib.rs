@@ -52,7 +52,7 @@ mod tests
 	#[test]
 	fn solution_is_correct()
 	{
-		let path = Path::new("../day01/input");
+		let path = Path::new("../aoc-2021/input-01");
 		let solution = solution_from(&path);
 
 		assert_eq!(solution, 1633);

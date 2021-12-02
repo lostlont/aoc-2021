@@ -3,12 +3,12 @@
 version = 3
 
 [[package]]
-name = "day01-core"
+name = "aoc-2021-core"
 version = "0.1.0"
 
 [[package]]
-name = "day01-tests"
+name = "aoc-2021-tests"
 version = "0.1.0"
 dependencies = [
- "day01-core",
+ "aoc-2021-core",
 ]
