@@ -2,8 +2,6 @@
 mod tests
 {
 	use std::path::Path;
-	use aoc_2021_core::day01a::gradients;
-	use aoc_2021_core::day01a::sum;
 	use aoc_2021_core::day01b::solution;
 	use aoc_2021_core::day01b::solution_from;
 	use aoc_2021_core::day01b::window;
