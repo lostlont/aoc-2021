@@ -49,7 +49,7 @@ mod tests
 	#[test]
 	fn epsilon_returns_least_common_values_in_decimal_for_multiple_lines()
 	{
-		let input : Vec<Vec<i32>> = vec![
+		let input = vec![
 			vec![1, 0, 0],
 			vec![0, 0, 1],
 			vec![1, 1, 1],

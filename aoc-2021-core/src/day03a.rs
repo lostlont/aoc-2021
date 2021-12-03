@@ -2,7 +2,6 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufReader;
 use std::path::Path;
-use itertools::Itertools;
 
 pub fn gamma<T>(input: T) -> i32
 where
@@ -68,14 +67,11 @@ where
 
 pub fn solution<'a, T>(input: T) -> i32
 where
-	T: IntoIterator,
-	T::Item: AsRef<Vec<i32>> + Clone,
+	T: IntoIterator + Clone,
+	T::Item: AsRef<Vec<i32>>,
 {
-	let (i1, i2) = input
-		.into_iter()
-		.tee();
-	let gamma = gamma(i1);
-	let epsilon = epsilon(i2);
+	let gamma = gamma(input.clone());
+	let epsilon = epsilon(input);
 	gamma * epsilon
 }
 
@@ -101,11 +97,12 @@ pub fn solution_from(path: &Path) -> i32
 							"Couldn't parse value: {}!",
 							c))
 					as i32)
-				.collect::<Vec<_>>());
+				.collect::<Vec<_>>())
+		.collect::<Vec<_>>();
 	solution(input)
 }
 
-fn to_decimal<'a, T>(digits: T) -> i32
+pub fn to_decimal<'a, T>(digits: T) -> i32
 where
 	T: IntoIterator<Item = i32>,
 {
