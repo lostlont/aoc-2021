@@ -2,17 +2,50 @@
 mod tests
 {
 	use std::path::Path;
-	use aoc_2021_core::day02a::Dive;
-	use aoc_2021_core::day02a::dive_all;
-	use aoc_2021_core::day02a::Position;
-	use aoc_2021_core::day02a::solution;
-	use aoc_2021_core::day02a::solution_from;
+	use aoc_2021_core::day02a::
+	{
+		Dive,
+		dive_all,
+		Direction,
+		Movement,
+		parse,
+		Position,
+		solution,
+		solution_from,
+	};
+
+	#[test]
+	fn parse_forward()
+	{
+		let actual = parse("forward 0");
+
+		let expected = Movement::from_values(Direction::Forward, 0);
+		assert_eq!(actual, expected);
+	}
+
+	#[test]
+	fn parse_up()
+	{
+		let actual = parse("up 1");
+
+		let expected = Movement::from_values(Direction::Up, 1);
+		assert_eq!(actual, expected);
+	}
+
+	#[test]
+	fn parse_down()
+	{
+		let actual = parse("down 2");
+
+		let expected = Movement::from_values(Direction::Down, 2);
+		assert_eq!(actual, expected);
+	}
 
 	#[test]
 	fn dive_handles_forward_zero()
 	{
 		let position = Position::new();
-		let input = "forward 0";
+		let input = Movement::from_values(Direction::Forward, 0);
 
 		let actual = position.dive(input);
 
@@ -24,7 +57,7 @@ mod tests
 	fn dive_handles_forward_one()
 	{
 		let position = Position::new();
-		let input = "forward 1";
+		let input = Movement::from_values(Direction::Forward, 1);
 
 		let actual = position.dive(input);
 
@@ -36,7 +69,7 @@ mod tests
 	fn dive_handles_up_zero()
 	{
 		let position = Position::new();
-		let input = "up 0";
+		let input = Movement::from_values(Direction::Up, 0);
 
 		let actual = position.dive(input);
 
@@ -48,7 +81,7 @@ mod tests
 	fn dive_handles_up_one()
 	{
 		let position = Position::new();
-		let input = "up 1";
+		let input = Movement::from_values(Direction::Up, 1);
 
 		let actual = position.dive(input);
 
@@ -60,7 +93,7 @@ mod tests
 	fn dive_handles_down_zero()
 	{
 		let position = Position::new();
-		let input = "down 0";
+		let input = Movement::from_values(Direction::Down, 0);
 
 		let actual = position.dive(input);
 
@@ -72,7 +105,7 @@ mod tests
 	fn dive_handles_down_one()
 	{
 		let position = Position::new();
-		let input = "down 1";
+		let input = Movement::from_values(Direction::Down, 1);
 
 		let actual = position.dive(input);
 
@@ -84,7 +117,7 @@ mod tests
 	fn dive_handles_different_starting_position()
 	{
 		let position = Position::from_values(2, 3);
-		let input = "forward 2";
+		let input = Movement::from_values(Direction::Forward, 2);
 
 		let actual = position.dive(input);
 
