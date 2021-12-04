@@ -71,6 +71,12 @@ impl Table
 		TablePositionIterator::new(self)
 	}
 
+	pub fn number_at(&self, x: usize, y: usize) -> i32
+	{
+		let index = self.to_index(x, y);
+		self.numbers[index]
+	}
+
 	pub fn is_marked_at(&self, x: usize, y: usize) -> bool
 	{
 		let index = self.to_index(x, y);

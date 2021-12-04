@@ -18,6 +18,23 @@ mod tests
 	}
 
 	#[test]
+	fn number_at_returns_correct_number()
+	{
+		let numbers = vec![
+			vec![1, 2],
+			vec![3, 4],
+		];
+		let table = Table::from(numbers.clone());
+
+		let actual = table
+			.positions()
+			.all(|p| table.number_at(p.0, p.1) == numbers[p.1][p.0]);
+
+		let expected = true;
+		assert_eq!(actual, expected);
+	}
+
+	#[test]
 	fn starts_unmarked()
 	{
 		let table = Table::from(vec![
