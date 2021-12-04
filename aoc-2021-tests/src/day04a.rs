@@ -75,6 +75,18 @@ mod tests
 		assert_eq!(actual, true);
 	}
 
+	#[test]
+	fn game_score_is_correct()
+	{
+		let mut game = create_game();
+
+		game.step();
+		game.step();
+		let actual = game.score();
+
+		assert_eq!(actual, (4 + 2) * 1);
+	}
+
 	fn create_game() -> Game
 	{
 		let numbers = Numbers::from(vec![3, 1, 2, 4]);
