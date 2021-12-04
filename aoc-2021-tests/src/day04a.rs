@@ -6,19 +6,16 @@ mod tests
 	{
 		Game,
 		Numbers,
+		solution,
 		Table,
 	};
 
 	#[test]
 	fn example_is_correct()
 	{
-		let mut game = create_example_game();
+		let game = create_example_game();
 
-		while !game.is_finished()
-		{
-			game.step();
-		}
-		let actual = game.score();
+		let actual = solution(game);
 
 		assert_eq!(actual, 4512);
 	}
