@@ -105,7 +105,21 @@ impl Table
 
 	pub fn is_bingo(&self) -> bool
 	{
-		false
+		self.has_bingo_row() || self.has_bingo_column()
+	}
+
+	fn has_bingo_row(&self) -> bool
+	{
+		(0..self.height)
+			.any(|y| (0..self.width)
+				.all(|x| self.is_marked_at(x, y)))
+	}
+
+	fn has_bingo_column(&self) -> bool
+	{
+		(0..self.width)
+			.any(|x| (0..self.height)
+				.all(|y| self.is_marked_at(x, y)))
 	}
 
 	fn to_index(&self, x: usize, y: usize) -> usize

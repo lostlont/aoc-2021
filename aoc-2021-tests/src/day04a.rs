@@ -114,6 +114,44 @@ mod tests
 		assert_eq!(actual, expected);
 	}
 
+	#[test]
+	fn table_is_bingo_returns_true_when_a_full_row_is_marked()
+	{
+		let table = Table::from_marks(
+			vec![
+				vec![1, 2],
+				vec![3, 4],
+			],
+			vec![
+				vec![false, false],
+				vec![true, true],
+			]);
+
+		let actual = table.is_bingo();
+
+		let expected = true;
+		assert_eq!(actual, expected);
+	}
+
+	#[test]
+	fn table_is_bingo_returns_true_when_a_full_column_is_marked()
+	{
+		let table = Table::from_marks(
+			vec![
+				vec![1, 2],
+				vec![3, 4],
+			],
+			vec![
+				vec![false, true],
+				vec![false, true],
+			]);
+
+		let actual = table.is_bingo();
+
+		let expected = true;
+		assert_eq!(actual, expected);
+	}
+
 	fn create_example_table1() -> Table
 	{
 		Table::from(vec![
