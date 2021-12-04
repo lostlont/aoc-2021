@@ -4,4 +4,5 @@ mod day02a;
 mod day02b;
 mod day03a;
 mod day03b;
+mod day04;
 mod day04a;
