@@ -22,29 +22,29 @@ impl Numbers
 
 pub struct Table
 {
-	data: Vec<i32>,
+	numbers: Vec<i32>,
 	marks: Vec<bool>,
-	width: i32,
-	height: i32,
+	width: usize,
+	height: usize,
 }
 
 impl Table
 {
-	pub fn from<TNumbers>(data: TNumbers) -> Self
+	pub fn from<TNumbers>(numbers: TNumbers) -> Self
 	where
 		TNumbers: IntoIterator + Clone,
 		TNumbers::Item: IntoIterator<Item = i32> + Clone,
 	{
 		Self
 		{
-			data: data.clone().into_iter().flatten().collect(),
-			marks: data.clone().into_iter().flatten().map(|_| false).collect(),
-			width: Self::width_of(data.clone()) as i32,
-			height: Self::height_of(data) as i32,
+			numbers: numbers.clone().into_iter().flatten().collect(),
+			marks: numbers.clone().into_iter().flatten().map(|_| false).collect(),
+			width: Self::width_of(numbers.clone()),
+			height: Self::height_of(numbers),
 		}
 	}
 
-	pub fn from_marks<TNumbers, TMarks>(data: TNumbers, marks: TMarks) -> Self
+	pub fn from_marks<TNumbers, TMarks>(numbers: TNumbers, marks: TMarks) -> Self
 	where
 		TNumbers: IntoIterator + Clone,
 		TNumbers::Item: IntoIterator<Item = i32> + Clone,
@@ -53,10 +53,10 @@ impl Table
 	{
 		Self
 		{
-			data: data.clone().into_iter().flatten().collect(),
+			numbers: numbers.clone().into_iter().flatten().collect(),
 			marks: marks.into_iter().flatten().collect(),
-			width: Self::width_of(data.clone()) as i32,
-			height: Self::height_of(data) as i32,
+			width: Self::width_of(numbers.clone()),
+			height: Self::height_of(numbers),
 		}
 	}
 
@@ -76,12 +76,12 @@ impl Table
 		numbers.into_iter().count()
 	}
 
-	pub fn width(&self) -> i32
+	pub fn width(&self) -> usize
 	{
 		self.width
 	}
 
-	pub fn height(&self) -> i32
+	pub fn height(&self) -> usize
 	{
 		self.height
 	}
@@ -91,13 +91,13 @@ impl Table
 		TablePositionIterator::new(self)
 	}
 
-	pub fn is_marked_at(&self, x: i32, y: i32) -> bool
+	pub fn is_marked_at(&self, x: usize, y: usize) -> bool
 	{
 		let index = self.to_index(x, y);
 		self.marks[index]
 	}
 
-	pub fn mark(&mut self, x: i32, y: i32)
+	pub fn mark(&mut self, x: usize, y: usize)
 	{
 		let index = self.to_index(x, y);
 		self.marks[index] = true;
@@ -108,7 +108,7 @@ impl Table
 		false
 	}
 
-	fn to_index(&self, x: i32, y: i32) -> usize
+	fn to_index(&self, x: usize, y: usize) -> usize
 	{
 		(self.width * y + x) as usize
 	}
@@ -116,10 +116,10 @@ impl Table
 
 pub struct TablePositionIterator
 {
-	width: i32,
-	height: i32,
-	x: i32,
-	y: i32,
+	width: usize,
+	height: usize,
+	x: usize,
+	y: usize,
 }
 
 impl TablePositionIterator
@@ -138,7 +138,7 @@ impl TablePositionIterator
 
 impl Iterator for TablePositionIterator
 {
-	type Item = (i32, i32);
+	type Item = (usize, usize);
 
 	fn next(&mut self) -> Option<Self::Item>
 	{
