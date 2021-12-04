@@ -95,6 +95,25 @@ mod tests
 		assert_eq!(actual, expected);
 	}
 
+	#[test]
+	fn table_is_bingo_returns_false_when_no_bingo()
+	{
+		let table = Table::from_marks(
+			vec![
+				vec![1, 2],
+				vec![3, 4],
+			],
+			vec![
+				vec![false, true],
+				vec![true, false],
+			]);
+
+		let actual = table.is_bingo();
+
+		let expected = false;
+		assert_eq!(actual, expected);
+	}
+
 	fn create_example_table1() -> Table
 	{
 		Table::from(vec![

@@ -30,15 +30,50 @@ pub struct Table
 
 impl Table
 {
-	pub fn from(data: Vec<Vec<i32>>) -> Self
+	pub fn from<TNumbers>(data: TNumbers) -> Self
+	where
+		TNumbers: IntoIterator + Clone,
+		TNumbers::Item: IntoIterator<Item = i32> + Clone,
 	{
 		Self
 		{
-			data: data.iter().cloned().flatten().collect(),
-			marks: data.iter().flatten().map(|_| false).collect(),
-			width: data[0].len() as i32,
-			height: data.len() as i32,
+			data: data.clone().into_iter().flatten().collect(),
+			marks: data.clone().into_iter().flatten().map(|_| false).collect(),
+			width: Self::width_of(data.clone()) as i32,
+			height: Self::height_of(data) as i32,
 		}
+	}
+
+	pub fn from_marks<TNumbers, TMarks>(data: TNumbers, marks: TMarks) -> Self
+	where
+		TNumbers: IntoIterator + Clone,
+		TNumbers::Item: IntoIterator<Item = i32> + Clone,
+		TMarks: IntoIterator,
+		TMarks::Item: IntoIterator<Item = bool>,
+	{
+		Self
+		{
+			data: data.clone().into_iter().flatten().collect(),
+			marks: marks.into_iter().flatten().collect(),
+			width: Self::width_of(data.clone()) as i32,
+			height: Self::height_of(data) as i32,
+		}
+	}
+
+	fn width_of<TNumbers>(numbers: TNumbers) -> usize
+	where
+		TNumbers: IntoIterator + Clone,
+		TNumbers::Item: IntoIterator<Item = i32> + Clone,
+	{
+		numbers.clone().into_iter().next().unwrap().into_iter().count()
+	}
+
+	fn height_of<TNumbers>(numbers: TNumbers) -> usize
+	where
+		TNumbers: IntoIterator + Clone,
+		TNumbers::Item: IntoIterator<Item = i32> + Clone,
+	{
+		numbers.into_iter().count()
 	}
 
 	pub fn width(&self) -> i32
@@ -66,6 +101,11 @@ impl Table
 	{
 		let index = self.to_index(x, y);
 		self.marks[index] = true;
+	}
+
+	pub fn is_bingo(&self) -> bool
+	{
+		false
 	}
 
 	fn to_index(&self, x: i32, y: i32) -> usize
