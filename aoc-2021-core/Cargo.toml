@@ -5,3 +5,4 @@ authors = ["Perjéssy, Lóránt <lostlont@lostlont.hu>"]
 edition = "2021"
 
 [dependencies]
+thiserror = "1.0.30"
