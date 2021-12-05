@@ -61,7 +61,7 @@ mod test
 	}
 
 	#[test]
-	fn into_iter_has_all_entries_in_order()
+	fn into_iter_has_all_entries_in_any_order()
 	{
 		let mut table = SparseTable::new();
 		table.set(
@@ -79,10 +79,14 @@ mod test
 			.map(|(k, v)| (*k, *v))
 			.collect::<Vec<_>>();
 
-		let expected = vec![
+		let expected1 = vec![
 			(Position::from(10, 11), 3),
 			(Position::from(12, 13), 5),
 		];
-		assert_eq!(actual, expected);
+		let expected2 = vec![
+			(Position::from(12, 13), 5),
+			(Position::from(10, 11), 3),
+		];
+		assert!((actual == expected1) || (actual == expected2));
 	}
 }
