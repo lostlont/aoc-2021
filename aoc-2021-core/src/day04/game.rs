@@ -42,12 +42,12 @@ impl Game
 
 		for table in &mut self.tables
 		{
-			let (x, y) = table
+			table
 				.positions()
 				.filter(|p| table.number_at(p.0, p.1) == number)
-				.next()
-				.unwrap();
-			table.mark(x, y);
+				.collect::<Vec<_>>()
+				.iter()
+				.for_each(|p| table.mark(p.0, p.1));
 		}
 	}
 

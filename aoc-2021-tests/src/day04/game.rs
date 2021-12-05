@@ -75,6 +75,25 @@ mod tests
 	}
 
 	#[test]
+	fn step_does_nothing_for_invalid_number()
+	{
+		let mut game = Game::from(
+			Numbers::from(vec![5]),
+			vec![
+				Table::from(
+					vec![
+						vec![1, 2],
+						vec![3, 4],
+					])
+			]);
+
+		game.step();
+		let actual = game.is_finished();
+
+		assert_eq!(actual, false);
+	}
+
+	#[test]
 	fn score_is_correct()
 	{
 		let mut game = create_game();
