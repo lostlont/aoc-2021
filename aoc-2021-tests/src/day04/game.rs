@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests
 {
-	use aoc_2021_core::day04a::
+	use aoc_2021_core::day04::
 	{
 		Game,
 		Numbers,

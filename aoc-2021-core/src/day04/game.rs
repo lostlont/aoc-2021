@@ -6,6 +6,7 @@ pub struct Game
 	numbers: Numbers,
 	tables: Vec<Table>,
 	last_number : Option<i32>,
+	finished_table_indices: Vec<usize>,
 }
 
 impl Game
@@ -17,6 +18,7 @@ impl Game
 			numbers,
 			tables,
 			last_number: None,
+			finished_table_indices: vec![],
 		}
 	}
 
@@ -35,6 +37,11 @@ impl Game
 		self.tables.iter().any(Table::is_bingo)
 	}
 
+	pub fn is_all_finished(&self) -> bool
+	{
+		self.tables.iter().all(Table::is_bingo)
+	}
+
 	pub fn step(&mut self)
 	{
 		let number = self.numbers.pull();
@@ -49,17 +56,23 @@ impl Game
 				.iter()
 				.for_each(|p| table.mark(p.0, p.1));
 		}
+
+		self.tables
+			.iter()
+			.enumerate()
+			.filter(|(_, table)| table.is_bingo())
+			.filter(|(i, _)| !self.finished_table_indices.contains(i))
+			.collect::<Vec<_>>()
+			.iter()
+			.for_each(|(i, _)| self.finished_table_indices.push(*i));
 	}
 
 	pub fn score(&self) -> i32
 	{
-		let table = self.tables
-			.iter()
-			.filter(|t| t.is_bingo())
-			.next()
-			.unwrap();
+		let table_index = self.finished_table_indices.last().unwrap();
+		let table = &self.tables[*table_index];
 
-		let sum : i32= table
+		let sum : i32 = table
 			.positions()
 			.filter(|p| !table.is_marked_at(p.0, p.1))
 			.map(|p| table.number_at(p.0, p.1))

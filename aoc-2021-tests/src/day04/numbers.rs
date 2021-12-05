@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests
 {
-	use aoc_2021_core::day04a::Numbers;
+	use aoc_2021_core::day04::Numbers;
 
 	#[test]
 	fn pull_returns_only()

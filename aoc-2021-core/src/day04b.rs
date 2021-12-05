@@ -5,7 +5,7 @@ pub use super::day04::parse;
 
 pub fn solution(mut game: Game) -> i32
 {
-	while !game.is_finished()
+	while !game.is_all_finished()
 	{
 		game.step();
 	}

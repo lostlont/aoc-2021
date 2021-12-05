@@ -6,3 +6,4 @@ mod day03a;
 mod day03b;
 mod day04;
 mod day04a;
+mod day04b;

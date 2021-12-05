@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests
 {
-	use aoc_2021_core::day04a::Table;
+	use aoc_2021_core::day04::Table;
 
 	#[test]
 	fn positions_iterates_all()
