@@ -8,6 +8,10 @@ mod tests
 		Position,
 		SparseTable,
 	};
+	use aoc_2021_core::day05a::
+	{
+		parse,
+	};
 
 	#[test]
 	fn example_is_correct()
@@ -23,6 +27,21 @@ mod tests
 			.count();
 
 		assert_eq!(actual, 5);
+	}
+
+	#[test]
+	fn parse_is_correct()
+	{
+		let input = "
+419,207 -> 419,109
+300,888 -> 803,385";
+		let actual = parse(input.as_bytes()).unwrap();
+
+		let expected = vec![
+			(Position::from(419, 207), Position::from(419, 109)),
+			(Position::from(300, 888), Position::from(803, 385)),
+		];
+		assert_eq!(actual, expected);
 	}
 
 	fn create_example_lines() -> impl IntoIterator<Item = Position>
