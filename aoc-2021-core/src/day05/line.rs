@@ -4,8 +4,8 @@ use super::Position;
 #[derive(Debug, Error, PartialEq)]
 pub enum LineError
 {
-	#[error("Diagonal lines can not be handled: {start:?} -> {end:?}!")]
-	DiagonalLine
+	#[error("Arbitrary lines can not be handled: {start:?} -> {end:?}!")]
+	ArbitraryLine
 	{
 		start: Position,
 		end: Position,
@@ -54,6 +54,25 @@ pub fn line(start: Position, end: Position) -> Result<Vec<Position>, LineError>
 	}
 	else
 	{
-		Err(LineError::DiagonalLine{ start, end })
+		let start_x = start.x() as i32;
+		let start_y = start.y() as i32;
+		let diff_x = end.x() as i32 - start_x;
+		let diff_y = end.y() as i32 - start_y;
+		if diff_x.abs() == diff_y.abs()
+		{
+			let sign_x = diff_x.signum();
+			let sign_y = diff_y.signum();
+			let length = diff_x.abs() + 1;
+			let result = (0..length)
+				.map(|v| Position::from(
+					(start_x + v * sign_x) as usize,
+					(start_y + v * sign_y) as usize))
+				.collect();
+			Ok(result)
+		}
+		else
+		{
+			Err(LineError::ArbitraryLine{ start, end })
+		}
 	}
 }

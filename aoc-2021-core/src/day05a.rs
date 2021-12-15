@@ -27,7 +27,12 @@ pub fn solution(input: impl IntoIterator<Item = (Position, Position)>) -> i32
 	let mut table = SparseTable::new();
 	let positions = input
 		.into_iter()
-		.filter_map(|(a, b)| line(a, b).ok())
+		.filter(|(start, end)|
+			(start.x() == end.x()) ||
+			(start.y() == end.y()))
+		.filter_map(|(start, end)|
+			line(start, end)
+			.ok())
 		.flatten()
 		.collect::<Vec<_>>();
 

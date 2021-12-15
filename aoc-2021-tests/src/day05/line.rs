@@ -84,14 +84,27 @@ mod test
 	}
 
 	#[test]
-	fn line_returns_error_for_diagonal_line()
+	fn line_handles_diagonal_line()
 	{
 		let start = Position::from(5, 5);
 		let end = Position::from(6, 6);
 
+		let actual = line(start, end)
+			.unwrap();
+
+		let expected = vec![start, end];
+		assert_eq!(actual, expected);
+	}
+
+	#[test]
+	fn line_returns_error_for_arbitrary_line()
+	{
+		let start = Position::from(0, 0);
+		let end = Position::from(2, 1);
+
 		let actual = line(start, end);
 
-		let expected = Err(LineError::DiagonalLine{ start, end });
+		let expected = Err(LineError::ArbitraryLine{ start, end });
 		assert_eq!(actual, expected);
 	}
 }
