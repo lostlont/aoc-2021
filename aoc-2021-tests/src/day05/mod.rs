@@ -4,7 +4,7 @@ mod position;
 mod sparse_table;
 
 #[cfg(test)]
-mod tests
+pub mod tests
 {
 	use aoc_2021_core::day05::
 	{
@@ -25,5 +25,41 @@ mod tests
 			(Position::from(300, 888), Position::from(803, 385)),
 		];
 		assert_eq!(actual, expected);
+	}
+
+	pub fn create_example_input() -> Vec<(Position, Position)>
+	{
+		vec![
+			(
+				Position::from(0, 9),
+				Position::from(5, 9)),
+			(
+				Position::from(8, 0),
+				Position::from(0, 8)),
+			(
+				Position::from(9, 4),
+				Position::from(3, 4)),
+			(
+				Position::from(2, 2),
+				Position::from(2, 1)),
+			(
+				Position::from(7, 0),
+				Position::from(7, 4)),
+			(
+				Position::from(6, 4),
+				Position::from(2, 0)),
+			(
+				Position::from(0, 9),
+				Position::from(2, 9)),
+			(
+				Position::from(3, 4),
+				Position::from(1, 4)),
+			(
+				Position::from(0, 0),
+				Position::from(8, 8)),
+			(
+				Position::from(5, 5),
+				Position::from(8, 2)),
+		]
 	}
 }

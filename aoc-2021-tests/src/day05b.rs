@@ -2,7 +2,7 @@
 mod tests
 {
 	use std::path::Path;
-	use aoc_2021_core::day05a::
+	use aoc_2021_core::day05b::
 	{
 		solution,
 		solution_from,
@@ -14,7 +14,7 @@ mod tests
 	{
 		let input = create_example_input();
 		let actual = solution(input);
-		assert_eq!(actual, 5);
+		assert_eq!(actual, 12);
 	}
 
 	#[test]
@@ -23,7 +23,7 @@ mod tests
 		let path = Path::new("../aoc-2021/input-05");
 		let actual = solution_from(&path).unwrap();
 
-		let expected = 5306;
+		let expected = 17787;
 		assert_eq!(actual, expected);
 	}
 }
