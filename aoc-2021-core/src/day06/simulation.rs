@@ -30,6 +30,11 @@ impl Simulation
 		self.fish.iter()
 	}
 
+	pub fn fish_count(&self) -> i32
+	{
+		self.fish.len() as i32
+	}
+
 	pub fn remaining_days(&self) -> i32
 	{
 		self.remaining_days

@@ -10,5 +10,5 @@ pub use simulation::Simulation;
 pub fn solution(mut simulation: Simulation) -> i32
 {
 	simulation.run();
-	simulation.fish().count() as i32
+	simulation.fish_count() as i32
 }

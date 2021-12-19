@@ -87,6 +87,30 @@ mod tests
 	}
 
 	#[test]
+	fn fish_count_returns_amount_of_fish()
+	{
+		let subject = Simulation::new(
+			vec![
+				Fish
+				{
+					timer: 0,
+				},
+				Fish
+				{
+					timer: 0,
+				},
+			],
+			15,
+			10,
+			0,
+		);
+
+		let actual = subject.fish_count();
+
+		assert_eq!(actual, 2);
+	}
+
+	#[test]
 	fn run_calls_step_on_each_day()
 	{
 		let mut subject = Simulation::new(
