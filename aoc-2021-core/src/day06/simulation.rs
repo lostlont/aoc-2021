@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::iter::repeat;
 use super::Fish;
 
 pub struct FishCount
@@ -47,10 +48,9 @@ impl Simulation
 
 	pub fn fish<'a>(&'a self) -> impl Iterator<Item = &'a Fish>
 	{
-		// TODO PL
 		self.fish_count
 			.iter()
-			.flat_map(|e| std::iter::repeat(&e.fish).take(e.count))
+			.flat_map(|e| repeat(&e.fish).take(e.count))
 	}
 
 	pub fn fish_count(&self) -> i32
