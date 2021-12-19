@@ -4,13 +4,13 @@ mod tests
 	use aoc_2021_core::day06::
 	{
 		Fish,
-		TimerSystem,
+		Simulation,
 	};
 
 	#[test]
 	fn step_decreases_timer_of_fish()
 	{
-		let mut subject = TimerSystem::new(
+		let mut subject = Simulation::new(
 			vec![
 				Fish
 				{
@@ -19,6 +19,7 @@ mod tests
 			],
 			15,
 			10,
+			0,
 		);
 
 		subject.step();
@@ -30,7 +31,7 @@ mod tests
 	#[test]
 	fn step_resets_timer_of_fish_when_zero_days_left()
 	{
-		let mut subject = TimerSystem::new(
+		let mut subject = Simulation::new(
 			vec![
 				Fish
 				{
@@ -39,6 +40,7 @@ mod tests
 			],
 			15,
 			10,
+			0,
 		);
 
 		subject.step();
@@ -50,7 +52,7 @@ mod tests
 	#[test]
 	fn step_creates_new_fish_when_zero_days_left()
 	{
-		let mut subject = TimerSystem::new(
+		let mut subject = Simulation::new(
 			vec![
 				Fish
 				{
@@ -59,6 +61,7 @@ mod tests
 			],
 			15,
 			10,
+			0,
 		);
 
 		subject.step();
@@ -81,5 +84,47 @@ mod tests
 			.map(|f| f)
 			.collect::<Vec<_>>();
 		assert_eq!(actual, expected);
+	}
+
+	#[test]
+	fn run_calls_step_on_each_day()
+	{
+		let mut subject = Simulation::new(
+			vec![
+				Fish
+				{
+					timer: 3,
+				},
+			],
+			15,
+			10,
+			2,
+		);
+
+		subject.run();
+		let actual = subject.fish().next().unwrap().timer;
+
+		assert_eq!(actual, 1);
+	}
+
+	#[test]
+	fn run_runs_until_remaining_days_reached_zero()
+	{
+		let mut subject = Simulation::new(
+			vec![
+				Fish
+				{
+					timer: 3,
+				},
+			],
+			15,
+			10,
+			2,
+		);
+
+		subject.run();
+		let actual = subject.remaining_days();
+
+		assert_eq!(actual, 0);
 	}
 }

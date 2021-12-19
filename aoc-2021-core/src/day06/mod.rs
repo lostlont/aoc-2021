@@ -1,7 +1,7 @@
 mod fish;
 mod parse;
-mod timer_system;
+mod simulation;
 
 pub use fish::Fish;
 pub use parse::parse;
-pub use timer_system::TimerSystem;
+pub use simulation::Simulation;
