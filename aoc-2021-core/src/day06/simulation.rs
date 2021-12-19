@@ -1,8 +1,15 @@
+use std::collections::HashMap;
 use super::Fish;
+
+pub struct FishCount
+{
+	fish: Fish,
+	count: usize,
+}
 
 pub struct Simulation
 {
-	fish: Vec<Fish>,
+	fish_count: Vec<FishCount>,
 	new_timer: i32,
 	reset_timer: i32,
 	remaining_days: i32,
@@ -16,9 +23,22 @@ impl Simulation
 		reset_timer: i32,
 		remaining_days: i32) -> Self
 	{
+		let mut fish_map = HashMap::new();
+		for fish in fish.into_iter()
+		{
+			let new_amount = fish_map.get(&fish).map_or(1, |v| v + 1);
+			fish_map.insert(fish, new_amount);
+		}
 		Self
 		{
-			fish: fish.into_iter().collect(),
+			fish_count: fish_map
+				.iter()
+				.map(|(fish, &amount)| FishCount
+				{
+					fish: fish.clone(),
+					count: amount,
+				})
+				.collect(),
 			new_timer,
 			reset_timer,
 			remaining_days,
@@ -27,12 +47,19 @@ impl Simulation
 
 	pub fn fish<'a>(&'a self) -> impl Iterator<Item = &'a Fish>
 	{
-		self.fish.iter()
+		// TODO PL
+		self.fish_count
+			.iter()
+			.flat_map(|e| std::iter::repeat(&e.fish).take(e.count))
 	}
 
 	pub fn fish_count(&self) -> i32
 	{
-		self.fish.len() as i32
+		self.fish_count
+			.iter()
+			.map(|e| e.count)
+			.sum::<usize>()
+			as i32
 	}
 
 	pub fn remaining_days(&self) -> i32
@@ -42,25 +69,46 @@ impl Simulation
 
 	pub fn step(&mut self)
 	{
-		let mut new_fish = vec![];
+		let mut reset_index = None;
+		let mut respawn_index = None;
 
-		for fish in &mut self.fish
+		for (index, entry) in &mut self.fish_count.iter_mut().enumerate()
 		{
-			if fish.timer > 0
+			if entry.fish.timer > 0
 			{
-				fish.timer -= 1;
+				entry.fish.timer -= 1;
 			}
 			else
 			{
-				fish.timer = self.reset_timer;
-				new_fish.push(Fish
-					{
-						timer: self.new_timer,
-					});
+				respawn_index = Some(index);
+			}
+
+			if entry.fish.timer == self.reset_timer
+			{
+				reset_index = Some(index);
 			}
 		}
 
-		self.fish.append(&mut new_fish);
+		if let Some(respawn_index) = respawn_index
+		{
+			if let Some(reset_index) = reset_index
+			{
+				self.fish_count[reset_index].count += self.fish_count[respawn_index].count;
+			}
+			else
+			{
+				self.fish_count.push(FishCount
+					{
+						fish: Fish
+						{
+							timer: self.reset_timer,
+						},
+						count: self.fish_count[respawn_index].count,
+					});
+			}
+
+			self.fish_count[respawn_index].fish.timer = self.new_timer;
+		}
 	}
 
 	pub fn run(&mut self)

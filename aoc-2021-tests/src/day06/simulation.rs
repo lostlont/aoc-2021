@@ -45,8 +45,11 @@ mod tests
 
 		subject.step();
 
-		let fish = subject.fish().next().unwrap();
-		assert_eq!(fish.timer, 10);
+		let count = subject
+			.fish()
+			.filter(|fish| fish.timer == 10)
+			.count();
+		assert_eq!(count, 1);
 	}
 
 	#[test]
@@ -65,9 +68,10 @@ mod tests
 		);
 
 		subject.step();
-		let actual = subject
+		let mut actual = subject
 			.fish()
 			.collect::<Vec<_>>();
+		actual.sort_by_key(|fish| fish.timer);
 
 		let expected = vec![
 			Fish
