@@ -7,8 +7,8 @@ pub use parse::parse;
 pub use parse::ParseError;
 pub use simulation::Simulation;
 
-pub fn solution(mut simulation: Simulation) -> i32
+pub fn solution(mut simulation: Simulation) -> usize
 {
 	simulation.run();
-	simulation.fish_count() as i32
+	simulation.fish_count()
 }

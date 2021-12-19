@@ -53,13 +53,12 @@ impl Simulation
 			.flat_map(|e| repeat(&e.fish).take(e.count))
 	}
 
-	pub fn fish_count(&self) -> i32
+	pub fn fish_count(&self) -> usize
 	{
 		self.fish_count
 			.iter()
 			.map(|e| e.count)
-			.sum::<usize>()
-			as i32
+			.sum()
 	}
 
 	pub fn remaining_days(&self) -> i32

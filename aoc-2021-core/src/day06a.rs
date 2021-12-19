@@ -6,7 +6,7 @@ use super::day06::ParseError;
 use super::day06::Simulation;
 use super::day06::solution;
 
-pub fn solution_from(path: &Path) -> Result<i32, ParseError>
+pub fn solution_from(path: &Path) -> Result<usize, ParseError>
 {
 	let file = File::open(&path)?;
 	let reader = BufReader::new(file);
