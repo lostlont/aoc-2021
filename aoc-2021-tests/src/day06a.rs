@@ -5,10 +5,10 @@ mod tests
 	use aoc_2021_core::day06::
 	{
 		Simulation,
+		solution,
 	};
 	use aoc_2021_core::day06a::
 	{
-		solution,
 		solution_from,
 	};
 	use super::super::day06::tests::create_example_input;
