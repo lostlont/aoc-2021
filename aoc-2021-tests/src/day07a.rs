@@ -1,9 +1,11 @@
 #[cfg(test)]
 mod tests
 {
+	use std::path::Path;
 	use aoc_2021_core::day07a::
 	{
 		solution,
+		solution_from,
 	};
 	use super::super::day07::tests::create_example_input;
 
@@ -12,9 +14,20 @@ mod tests
 	{
 		let input = create_example_input();
 
-		let actual = solution(input);
+		let actual = solution(input)
+			.unwrap();
 
-		let expected = Some(37);
-		assert_eq!(actual, expected);
+		assert_eq!(actual, 37);
+	}
+
+	#[test]
+	fn solution_is_correct()
+	{
+		let path = Path::new("../aoc-2021/input-07");
+
+		let actual = solution_from(&path)
+			.unwrap();
+
+		assert_eq!(actual, 339321);
 	}
 }
