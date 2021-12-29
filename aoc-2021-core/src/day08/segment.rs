@@ -1,7 +1,7 @@
 use std::str::FromStr;
 use thiserror::Error;
 
-#[derive(Debug, Eq, Hash, PartialEq)]
+#[derive(Clone, Debug, Eq, Hash, PartialEq)]
 pub enum Segment
 {
 	A,

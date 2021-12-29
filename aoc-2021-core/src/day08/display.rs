@@ -24,6 +24,11 @@ impl Display
 		}
 	}
 
+	pub fn signals(&self) -> impl Iterator<Item = &Digit>
+	{
+		self.signals.iter()
+	}
+
 	pub fn output(&self) -> impl Iterator<Item = &Digit>
 	{
 		self.output.iter()

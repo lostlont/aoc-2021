@@ -18,3 +18,4 @@ mod day07a;
 mod day07b;
 mod day08;
 mod day08a;
+mod day08b;
