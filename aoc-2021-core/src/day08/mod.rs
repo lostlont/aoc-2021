@@ -4,6 +4,7 @@ mod display;
 mod segment;
 
 pub use board::Board;
+pub use board::ParseBoardError;
 pub use digit::Digit;
 pub use digit::ParseDigitError;
 pub use display::Display;
