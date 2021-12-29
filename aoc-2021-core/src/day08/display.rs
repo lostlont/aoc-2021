@@ -23,6 +23,11 @@ impl Display
 			output: output.into_iter().collect(),
 		}
 	}
+
+	pub fn output(&self) -> impl Iterator<Item = &Digit>
+	{
+		self.output.iter()
+	}
 }
 
 #[derive(Debug, Error)]

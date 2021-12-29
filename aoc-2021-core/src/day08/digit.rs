@@ -19,6 +19,11 @@ impl Digit
 			segments: segments.into_iter().collect(),
 		}
 	}
+
+	pub fn segments(&self) -> impl Iterator<Item = &Segment>
+	{
+		self.segments.iter()
+	}
 }
 
 #[derive(Debug, Error, PartialEq)]
