@@ -7,7 +7,7 @@ where
 	<TItem as Add>::Output: Div<TItem>,
 	<<TItem as Add>::Output as Div<TItem>>::Output: Into<TItem>,
 	TInput: IntoIterator<Item = TItem>,
-	f32: Into<TItem>,
+	i32: Into<TItem>,
 {
 	let mut sorted = input
 		.into_iter()
@@ -28,7 +28,7 @@ where
 			let left = sorted[half_count - 1].clone();
 			let right = sorted[half_count].clone();
 			let sum = left + right;
-			let result = sum / 2.0f32.into();
+			let result = sum / 2.into();
 			Some(result.into())
 		}
 		else

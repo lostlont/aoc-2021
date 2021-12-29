@@ -7,13 +7,14 @@ mod tests
 	};
 	use super::super::day07::tests::create_example_input;
 
-	/*
 	#[test]
 	fn example_is_correct()
 	{
 		let input = create_example_input();
+
 		let actual = solution(input);
-		assert_eq!(actual, 2);
+
+		let expected = Some(37);
+		assert_eq!(actual, expected);
 	}
-	*/
 }
