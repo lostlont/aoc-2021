@@ -96,4 +96,24 @@ mod tests
 			.unwrap();
 		assert_eq!(table, expected);
 	}
+
+	#[test]
+	fn into_iter_returns_all_entries_in_row_major_order()
+	{
+		let input = [[1, 2], [3, 4]];
+		let table = Table::new(input)
+			.unwrap();
+
+		let actual = table
+			.into_iter()
+			.collect::<Vec<_>>();
+
+		let expected = vec![
+			(Position::from(0, 0), 1),
+			(Position::from(1, 0), 2),
+			(Position::from(0, 1), 3),
+			(Position::from(1, 1), 4),
+		];
+		assert_eq!(actual, expected);
+	}
 }

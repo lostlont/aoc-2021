@@ -87,3 +87,59 @@ impl Table
 		position.y() * self.width + position.x()
 	}
 }
+
+pub struct TableIterator<'a>
+{
+	table: &'a Table,
+	position: Position,
+}
+
+impl<'a> Iterator for TableIterator<'a>
+{
+	type Item = (Position, i32);
+
+	fn next(&mut self) -> Option<Self::Item>
+	{
+		if self.position.y() < self.table.height
+		{
+			let position = self.position;
+			let value = self.table
+				.get(self.position)
+				.unwrap();
+
+			self.position = if self.position.x() < self.table.width - 1
+			{
+				Position::from(
+					self.position.x() + 1,
+					self.position.y())
+			}
+			else
+			{
+				Position::from(
+					0,
+					self.position.y() + 1)
+			};
+
+			Some((position, value))
+		}
+		else
+		{
+			None
+		}
+	}
+}
+
+impl<'a> IntoIterator for &'a Table
+{
+	type Item = (Position, i32);
+	type IntoIter = TableIterator<'a>;
+
+	fn into_iter(self) -> Self::IntoIter
+	{
+		TableIterator
+		{
+			table: self,
+			position: Position::from(0, 0),
+		}
+	}
+}
