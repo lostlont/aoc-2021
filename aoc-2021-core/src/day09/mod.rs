@@ -14,7 +14,7 @@ pub fn find_low_points<'a>(table: &'a Table) -> impl IntoIterator<Item = (Positi
 			.all(|(_, v2)| *v < v2))
 }
 
-fn neighbors_in<'a>(table: &'a Table, position: Position) -> impl IntoIterator<Item = (Position, i32)> + 'a
+pub fn neighbors_in<'a>(table: &'a Table, position: Position) -> impl IntoIterator<Item = (Position, i32)> + 'a
 {
 	neighbors(position)
 		.into_iter()
