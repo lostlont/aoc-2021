@@ -1,3 +1,5 @@
+use std::io::BufRead;
+use thiserror::Error;
 use super::super::common::Position;
 
 #[derive(Debug, PartialEq)]
@@ -8,8 +10,38 @@ pub struct Table
 	values: Vec<i32>,
 }
 
+#[derive(Debug, Error)]
+pub enum ParseTableError
+{
+	#[error("IO error: {0}!")]
+	IoError(#[from] std::io::Error),
+
+	#[error("Value error: {0}!")]
+	ValueError(#[from] std::num::ParseIntError),
+
+	#[error("Invalid table!")]
+	InvalidTableError,
+}
+
 impl Table
 {
+	pub fn parse(input: impl BufRead) -> Result<Self, ParseTableError>
+	{
+		let values = input
+			.lines()
+			.collect::<Result<Vec<_>, _>>()?
+			.iter()
+			.map(|line|
+				line
+					.chars()
+					.map(|c| c.to_string().parse::<i32>())
+					.collect::<Result<Vec<_>, _>>())
+			.collect::<Result<Vec<_>, _>>()?;
+
+		Self::new(values)
+				.ok_or(ParseTableError::InvalidTableError)
+	}
+
 	pub fn new<TValues>(values: TValues) -> Option<Self>
 	where
 		TValues: IntoIterator,
