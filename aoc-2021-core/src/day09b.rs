@@ -1,7 +1,26 @@
 use std::collections::HashSet;
 use super::common::Position;
-use super::day09::Table;
+use super::day09::find_low_points;
 use super::day09::neighbors_in;
+use super::day09::Table;
+
+pub fn solve(table: &Table) -> i32
+{
+	let mut basin_sizes = find_low_points(table)
+		.into_iter()
+		.map(|(p, _)| find_basin(table, p)
+			.into_iter()
+			.count() as i32)
+		.collect::<Vec<_>>();
+
+	basin_sizes.sort_unstable();
+
+	basin_sizes
+		.iter()
+		.rev()
+		.take(3)
+		.product()
+}
 
 pub fn find_basin<'a>(table: &'a Table, position: Position) -> impl IntoIterator<Item = Position> + 'a
 {

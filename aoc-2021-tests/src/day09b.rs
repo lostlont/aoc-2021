@@ -7,6 +7,7 @@ mod tests
 	use aoc_2021_core::day09b::
 	{
 		find_basin,
+		solve,
 	};
 	use super::super::day09::tests::create_example_input;
 
@@ -36,25 +37,12 @@ mod tests
 		let expected = HashSet::from_iter(expected);
 		assert_eq!(actual, expected);
 	}
-/*
+
 	#[test]
 	fn example_is_correct()
 	{
 		let table = create_example_input();
 		let actual = solve(&table);
-		assert_eq!(actual, 15);
+		assert_eq!(actual, 1134);
 	}
-*/
-/*
-	#[test]
-	fn solution_is_correct()
-	{
-		let path = Path::new("../aoc-2021/input-09");
-
-		let actual = solve_from(&path)
-			.unwrap();
-
-		assert_eq!(actual, 494);
-	}
-*/
 }

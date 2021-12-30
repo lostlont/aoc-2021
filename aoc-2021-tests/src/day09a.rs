@@ -2,7 +2,6 @@
 mod tests
 {
 	use std::path::Path;
-	use aoc_2021_core::day09::Table;
 	use aoc_2021_core::day09a::
 	{
 		solve,
