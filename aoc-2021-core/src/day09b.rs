@@ -1,7 +1,11 @@
 use std::collections::HashSet;
+use std::fs::File;
+use std::io::BufReader;
+use std::path::Path;
 use super::common::Position;
 use super::day09::find_low_points;
 use super::day09::neighbors_in;
+use super::day09::ParseTableError;
 use super::day09::Table;
 
 pub fn solve(table: &Table) -> i32
@@ -20,6 +24,15 @@ pub fn solve(table: &Table) -> i32
 		.rev()
 		.take(3)
 		.product()
+}
+
+pub fn solve_from(path: &Path) -> Result<i32, ParseTableError>
+{
+	let file = File::open(&path)?;
+	let reader = BufReader::new(file);
+	let table = Table::parse(reader)?;
+
+	Ok(solve(&table))
 }
 
 pub fn find_basin<'a>(table: &'a Table, position: Position) -> impl IntoIterator<Item = Position> + 'a

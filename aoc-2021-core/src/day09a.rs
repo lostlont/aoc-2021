@@ -1,9 +1,9 @@
 use std::fs::File;
 use std::io::BufReader;
 use std::path::Path;
+use super::day09::find_low_points;
 use super::day09::Table;
 use super::day09::ParseTableError;
-use super::day09::find_low_points;
 
 pub fn solve(table: &Table) -> i32
 {
