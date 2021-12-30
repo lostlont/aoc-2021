@@ -1,10 +1,10 @@
 #[cfg(test)]
 mod test
 {
+	use aoc_2021_core::common::Position;
 	use aoc_2021_core::day05::
 	{
 		draw_line,
-		Position,
 		SparseTable,
 	};
 

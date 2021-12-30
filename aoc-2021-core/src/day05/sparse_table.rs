@@ -1,6 +1,6 @@
 use std::collections::hash_map;
 use std::collections::HashMap;
-use super::position::Position;
+use super::super::common::Position;
 
 pub struct SparseTable
 {

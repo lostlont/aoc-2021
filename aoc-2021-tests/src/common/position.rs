@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod test
 {
-	use aoc_2021_core::day05::Position;
+	use aoc_2021_core::common::Position;
 
 	#[test]
 	fn position_x()

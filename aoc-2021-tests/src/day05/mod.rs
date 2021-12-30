@@ -1,16 +1,12 @@
 mod draw_line;
 mod line;
-mod position;
 mod sparse_table;
 
 #[cfg(test)]
 pub mod tests
 {
-	use aoc_2021_core::day05::
-	{
-		parse,
-		Position,
-	};
+	use aoc_2021_core::common::Position;
+	use aoc_2021_core::day05::parse;
 
 	#[test]
 	fn parse_is_correct()

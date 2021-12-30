@@ -1,11 +1,8 @@
 #[cfg(test)]
 mod test
 {
-	use aoc_2021_core::day05::
-	{
-		Position,
-		SparseTable,
-	};
+	use aoc_2021_core::common::Position;
+	use aoc_2021_core::day05::SparseTable;
 
 	#[test]
 	fn get_returns_position_with_zero_for_nonexisting_entry()

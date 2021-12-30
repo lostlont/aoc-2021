@@ -1,4 +1,4 @@
-use super::Position;
+use super::super::common::Position;
 use super::SparseTable;
 
 pub fn draw_line<T>(table: &mut SparseTable, positions: T)

@@ -1,11 +1,11 @@
 use std::fs::File;
 use std::io::BufReader;
 use std::path::Path;
+use super::common::Position;
 use super::day05::draw_line;
 use super::day05::line;
 use super::day05::parse;
 use super::day05::ParseLineError;
-use super::day05::Position;
 use super::day05::SparseTable;
 
 pub fn solution(input: impl IntoIterator<Item = (Position, Position)>) -> i32
