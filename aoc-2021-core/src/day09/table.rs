@@ -34,7 +34,7 @@ impl Table
 			}
 			else
 			{
-				let row_width = collected.len() - width;
+				let row_width = collected.len() - width * (height - 1);
 				if row_width != width
 				{
 					return None;
@@ -53,6 +53,16 @@ impl Table
 			height,
 			values: collected,
 		})
+	}
+
+	pub fn width(&self) -> usize
+	{
+		self.width
+	}
+
+	pub fn height(&self) -> usize
+	{
+		self.height
 	}
 
 	pub fn get(&self, position: Position) -> Option<i32>
@@ -77,7 +87,7 @@ impl Table
 		}
 	}
 
-	fn is_valid_position(&self, position: Position) -> bool
+	pub fn is_valid_position(&self, position: Position) -> bool
 	{
 		(position.x() < self.width) && (position.y() < self.height)
 	}
