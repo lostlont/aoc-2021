@@ -3,7 +3,6 @@ use std::io::BufRead;
 use std::io::BufReader;
 use std::path::Path;
 use thiserror::Error;
-use super::day10::character_points;
 use super::day10::check_line;
 use super::day10::LineStatus;
 
@@ -36,4 +35,16 @@ pub fn solve(input: impl BufRead) -> Result<i32, ParseLineError>
 	}
 
 	Ok(result)
+}
+
+fn character_points(ch: char) -> i32
+{
+	match ch
+	{
+		')' => 3,
+		']' => 57,
+		'}' => 1197,
+		'>' => 25137,
+		_ => 0,
+	}
 }
