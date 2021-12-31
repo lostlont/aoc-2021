@@ -25,3 +25,4 @@ mod day09a;
 mod day09b;
 mod day10;
 mod day10a;
+mod day10b;

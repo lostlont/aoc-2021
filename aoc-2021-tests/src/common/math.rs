@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests
 {
-	use aoc_2021_core::day07::median;
+	use aoc_2021_core::common::math::median;
 
 	#[test]
 	fn median_returns_none_for_no_element()

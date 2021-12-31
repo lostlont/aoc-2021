@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::BufReader;
 use std::path::Path;
-use super::day07::median;
+use super::common::math::median;
 use super::day07::parse;
 use super::day07::ParseError;
 
