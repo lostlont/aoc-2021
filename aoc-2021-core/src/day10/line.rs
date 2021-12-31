@@ -2,7 +2,7 @@
 pub enum LineStatus
 {
 	Valid,
-	Corrupted,
+	Corrupted(char),
 	Incomplete,
 }
 
@@ -33,7 +33,7 @@ pub fn check_line(line: &str) -> LineStatus
 			}
 			else
 			{
-				return LineStatus::Corrupted;
+				return LineStatus::Corrupted(ch);
 			}
 		}
 	}

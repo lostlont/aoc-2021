@@ -42,9 +42,9 @@ mod tests
 	#[test]
 	fn check_line_recognizes_simple_corrupted_line()
 	{
-		let input = "(>";
+		let input = "(}";
 		let actual = check_line(input);
-		assert_eq!(actual, LineStatus::Corrupted);
+		assert_eq!(actual, LineStatus::Corrupted('}'));
 	}
 
 	#[test]
@@ -52,6 +52,6 @@ mod tests
 	{
 		let input = r"({}{([][>)})";
 		let actual = check_line(input);
-		assert_eq!(actual, LineStatus::Corrupted);
+		assert_eq!(actual, LineStatus::Corrupted('>'));
 	}
 }
