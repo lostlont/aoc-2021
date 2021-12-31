@@ -1,14 +1,20 @@
-//use std::fs::File;
+use std::fs::File;
 use std::io::BufRead;
 use std::io::BufReader;
-//use std::path::Path;
-//use thiserror::Error;
+use std::path::Path;
 use super::common::math;
 use super::day10::check_line;
 use super::day10::LineStatus;
 use super::day10::ParseLineError;
 
-pub fn solve(input: impl BufRead) -> Result<i32, ParseLineError>
+pub fn solve_from(path: &Path) -> Result<i64, ParseLineError>
+{
+	let file = File::open(&path)?;
+	let reader = BufReader::new(file);
+	solve(reader)
+}
+
+pub fn solve(input: impl BufRead) -> Result<i64, ParseLineError>
 {
 	let mut points = vec![];
 
@@ -29,13 +35,13 @@ pub fn solve(input: impl BufRead) -> Result<i32, ParseLineError>
 	Ok(result)
 }
 
-fn completion_points(stack: &Vec<char>) -> i32
+fn completion_points(stack: &Vec<char>) -> i64
 {
 	stack
 		.iter()
 		.cloned()
 		.rev()
-		.map(character_points)
+		.map(|c| character_points(c) as i64)
 		.fold(0, |acc, v| acc * 5 + v)
 }
 
