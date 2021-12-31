@@ -3,7 +3,7 @@ pub enum LineStatus
 {
 	Valid,
 	Corrupted(char),
-	Incomplete,
+	Incomplete(Vec<char>),
 }
 
 pub fn check_line(line: &str) -> LineStatus
@@ -44,6 +44,6 @@ pub fn check_line(line: &str) -> LineStatus
 	}
 	else
 	{
-		LineStatus::Incomplete
+		LineStatus::Incomplete(stack)
 	}
 }

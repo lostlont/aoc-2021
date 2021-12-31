@@ -27,16 +27,22 @@ mod tests
 	fn check_line_recognizes_simple_incomplete_line()
 	{
 		let input = "(";
+
 		let actual = check_line(input);
-		assert_eq!(actual, LineStatus::Incomplete);
+
+		let expected = LineStatus::Incomplete(vec![ '(' ]);
+		assert_eq!(actual, expected);
 	}
 
 	#[test]
 	fn check_line_recognizes_complex_incomplete_line()
 	{
-		let input = r"()[{{}()}";
+		let input = r"()[({{}()}";
+
 		let actual = check_line(input);
-		assert_eq!(actual, LineStatus::Incomplete);
+
+		let expected = LineStatus::Incomplete(vec![ '[', '(' ]);
+		assert_eq!(actual, expected);
 	}
 
 	#[test]

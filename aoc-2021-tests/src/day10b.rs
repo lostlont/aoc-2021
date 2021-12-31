@@ -4,11 +4,11 @@ mod tests
 	//use std::path::Path;
 	use aoc_2021_core::day10b::
 	{
-		//solve,
+		solve,
 		//solve_from,
 	};
-	//use super::super::day10::tests::create_example_input;
-/*
+	use super::super::day10::tests::create_example_input;
+
 	#[test]
 	fn example_is_correct()
 	{
@@ -19,5 +19,4 @@ mod tests
 
 		assert_eq!(actual, 288957);
 	}
-*/
 }
