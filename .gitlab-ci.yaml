@@ -1,0 +1,8 @@
+test:
+  tags:
+    - linux
+  image: rust:1.56.1
+  script:
+    - cd aoc-2021-tests
+    - cargo build --verbose --all
+    - cargo test --verbose --all
